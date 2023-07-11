@@ -143,8 +143,7 @@ class Client:
                 index = len(lines) - 1
 
 def _create_completion(model: str, messages: list, stream: bool, **kwargs):
-    yield 'Vercel is currently not working.'
-    return
+
     
     conversation = 'This is a conversation between a human and a language model, respond to the last message accordingly, referring to the past history of messages if needed.\n'
     
