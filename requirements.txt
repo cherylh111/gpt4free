@@ -20,7 +20,7 @@ retrying
 mailgw_temporary_email
 pycryptodome
 random-password-generator
-numpy@https://github.com/numpy/numpy/archive/refs/tags/v1.25.1.zip
-tornado@https://github.com/tornadoweb/tornado/archive/refs/tags/v6.3.2.zip
+numpy>=1.22.2
+tornado>=6.3.2
 PyExecJS
 browser_cookie3
