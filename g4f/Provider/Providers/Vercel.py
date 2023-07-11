@@ -105,6 +105,8 @@ class Client:
                 try:
                     response = self.session.post('https://sdk.vercel.ai/api/generate',
                                                  json=payload, headers=headers, content_callback=callback)
+                    print(f"Error: payload {payload} headers {headers}.")
+
                     response.raise_for_status()
 
                 except Exception as e:
@@ -121,7 +123,7 @@ class Client:
         index = 0
         while True:
             try:
-                chunk = chunks_queue.get(block=True, timeout=0.1)
+                chunk = chunks_queue.get(block=True, timeout=0.5)
 
             except queue.Empty:
                 if error:
@@ -151,10 +153,11 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
         conversation += '%s: %s\n' % (message['role'], message['content'])
     
     conversation += 'assistant: '
-    
+    print(f'Error: conversation  {conversation}.')
     completion = Client().generate(model, conversation)
 
     for token in completion:
+        print(f"Error: token {token}}.")
         yield token
 
 params = f'g4f.Providers.{os.path.basename(__file__)[:-3]} supports: ' + \
