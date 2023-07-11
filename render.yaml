@@ -1,0 +1,15 @@
+services:
+  # python web service
+  - type: web
+    name: gpt4free
+    env: 
+      PYTHON_VERSION: 3.9
+    rootDir: .
+    autoDeploy: false
+    repo: https://github.com/cherylh111/gpt4free # optional
+    region: singapore       # optional (defaults to oregon)
+    plan: free              # optional (defaults to starter instance type)
+    branch: main            # optional (defaults to master)
+    healthCheckPath: /healthz
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 -m interference.app
