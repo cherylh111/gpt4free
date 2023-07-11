@@ -4,9 +4,13 @@ import base64
 import execjs
 import queue
 import threading
+import logging
 
 from curl_cffi import requests
 from ...typing import sha256, Dict, get_type_hints
+
+logging.basicConfig()
+logger = logging.getLogger()
 
 url = 'https://play.vercel.ai'
 supports_stream = True
@@ -105,8 +109,7 @@ class Client:
                 try:
                     response = self.session.post('https://sdk.vercel.ai/api/generate',
                                                  json=payload, headers=headers, content_callback=callback)
-                    print(f"Error: payload {payload} headers {headers}.")
-
+                    logger.info(f"payload {payload} headers {headers}.")
                     response.raise_for_status()
 
                 except Exception as e:
@@ -153,11 +156,12 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
         conversation += '%s: %s\n' % (message['role'], message['content'])
     
     conversation += 'assistant: '
-    print(f'Error: conversation  {conversation}.')
+    logger.info(f'Error: conversation  {conversation}.')
+    
     completion = Client().generate(model, conversation)
 
     for token in completion:
-        print(f"Error: token {token}.")
+        logger.info(f"Error: token {token}.")
         yield token
 
 params = f'g4f.Providers.{os.path.basename(__file__)[:-3]} supports: ' + \
