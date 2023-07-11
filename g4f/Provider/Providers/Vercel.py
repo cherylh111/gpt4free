@@ -157,7 +157,7 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
     completion = Client().generate(model, conversation)
 
     for token in completion:
-        print(f"Error: token {token}}.")
+        print(f"Error: token {token}.")
         yield token
 
 params = f'g4f.Providers.{os.path.basename(__file__)[:-3]} supports: ' + \
